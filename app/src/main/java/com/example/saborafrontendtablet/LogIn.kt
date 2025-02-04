@@ -1,5 +1,6 @@
 package com.example.saborafrontendtablet
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,18 @@ class LogIn : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        context = this
+    }
+
+    companion object{
+
+        lateinit var context: Context
+
+
+        fun getAppContext() : Context{
+            return context
         }
     }
 }

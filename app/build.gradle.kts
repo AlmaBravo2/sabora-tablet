@@ -1,7 +1,20 @@
+import java.util.Properties
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if(localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { stream ->
+        localProperties.load(stream)
+    }
+}
+
+val apiUrl = localProperties["API_URL"] ?: ""
 
 android {
     namespace = "com.example.saborafrontendtablet"
@@ -13,6 +26,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "API_URL", "\"${apiUrl}\"")
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +48,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        buildConfig = true
+        viewBinding = true
+
+    }
 }
 
 dependencies {
@@ -46,4 +67,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.android.material:material:1.4.0")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0") // Para compatibilidad con Kotlin
+
+
+
 }

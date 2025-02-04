@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permiso para acceder a Internet -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,10 +14,25 @@
         android:roundIcon="@mipmap/icono_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaboraFrontendTablet"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:screenOrientation="landscape"
-            android:name=".LogIn"
+            android:name=".ComienzoPreguntas"
+            android:exported="true"/>
+
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".Pregunta1"
+            android:exported="true"/>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".PreguntaActivity"
+            android:exported="true"/>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".InicioForm"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
