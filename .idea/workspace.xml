@@ -49,24 +49,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b84b89a5-c45a-4973-95b9-a00c9f0a505c" name="Changes" comment="formulario preguntas personales sin guardado respuesta">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/EsperandoExperiencia.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/network/EsperandoExperienciaLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/esperando_experiencia.xml" afterDir="false" />
+    <list default="true" id="b84b89a5-c45a-4973-95b9-a00c9f0a505c" name="Changes" comment="algo más bonito">
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/InicioForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/InicioForm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/LogIn.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/LogIn.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/PreguntaActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/PreguntaActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/network/FormsLogic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/network/FormsLogic.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/network/LogInLogic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/saborafrontendtablet/network/LogInLogic.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,11 +259,29 @@
       <option name="project" value="LOCAL" />
       <updated>1738693339509</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="se guardan las respuestas">
+      <option name="closed" value="true" />
+      <created>1738791880654</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738791880654</updated>
+    </task>
+    <task id="LOCAL-00003" summary="algo más bonito">
+      <option name="closed" value="true" />
+      <created>1738795727044</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738795727044</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="formulario preguntas personales sin guardado respuesta" />
-    <option name="LAST_COMMIT_MESSAGE" value="formulario preguntas personales sin guardado respuesta" />
+    <MESSAGE value="se guardan las respuestas" />
+    <MESSAGE value="algo más bonito" />
+    <option name="LAST_COMMIT_MESSAGE" value="algo más bonito" />
   </component>
 </project>

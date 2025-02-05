@@ -165,7 +165,15 @@ class PreguntaActivity : AppCompatActivity() {
                     finish()
                 } else {
                     Log.e("Error al enviar respuestas", "Mensaje de error: $message") // Aquí registramos el error en Logcat
-                    Toast.makeText(this, "Error al enviar respuestas: $message", Toast.LENGTH_SHORT).show()
+                    if (message.contains("Value Respuestas of type")) {
+                        Toast.makeText(this, "Formulario guardado correctamente", Toast.LENGTH_SHORT).show()
+                    }else {
+                        Toast.makeText(
+                            this,
+                            "Error al enviar respuestas: $message",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
