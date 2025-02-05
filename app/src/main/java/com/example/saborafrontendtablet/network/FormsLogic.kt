@@ -36,4 +36,21 @@ class FormsLogic {
         )
         queue.add(jsonObjectRequest)
     }
+
+
+    fun sendAnswers(jsonObject: JSONObject, callback: (Boolean, String) -> Unit) {
+        val url = "$apiUrl/form/${jsonObject.getInt("formId")}/answer"
+
+        val request = JsonObjectRequest(
+            Request.Method.POST, url, jsonObject,
+            { response ->
+                callback(true, response.toString())
+            },
+            { error ->
+                callback(false, error.toString())
+            }
+        )
+
+        Volley.newRequestQueue(LogIn.getAppContext()).add(request)
+    }
 }

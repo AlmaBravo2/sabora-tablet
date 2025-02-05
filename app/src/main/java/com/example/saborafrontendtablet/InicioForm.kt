@@ -27,8 +27,6 @@ class InicioForm : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
             }
 
     companion object{

@@ -33,6 +33,10 @@
         <activity
             android:screenOrientation="landscape"
             android:name=".InicioForm"
+            android:exported="true"/>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".LogIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

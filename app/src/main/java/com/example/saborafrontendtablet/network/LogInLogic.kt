@@ -16,7 +16,7 @@ class LogInLogic {
     private var isLogInQueue = false
     lateinit var userVolleyQueue : RequestQueue
 
-    fun logIn(username : String, password : String){
+    fun logIn(username : String, password : String, callback: (Boolean, String?) -> Unit){
 
 
         val url = "$apiUrl/user?username=$username&password=$password"
@@ -28,12 +28,18 @@ class LogInLogic {
             url,
             null,
             { response ->
+                try {
                 val user = JSONObject(response.toString())
 
-                Log.i("User is ", user.toString())
+                callback(true, "Login exitoso: ${user.toString()}")
+
+                } catch (e: Exception) {
+                    callback(false, "Error al procesar la respuesta")
+                }
             },
-            {
-                Log.i("Error", it.toString())
+            { error ->
+                callback(false, "Error en la solicitud: ${error.message}")
+
             }
         )
         queue.add(jsonObjectRequest)
