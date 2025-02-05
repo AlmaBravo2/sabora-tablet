@@ -1,6 +1,7 @@
 package com.example.saborafrontendtablet
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -172,9 +173,24 @@ class PreguntaActivity : AppCompatActivity() {
 
     // Método para mostrar una pregunta de tipo RANGE
     private fun mostrarPreguntaRango(question: RangeQuestionDTO) {
+        val customFont = ResourcesCompat.getFont(this, R.font.inter)
+
         // Establecer el texto de la pregunta
-        val questionText = findViewById<TextView>(R.id.questionText)
-        questionText.text = question.question
+        val questionText = findViewById<TextView>(R.id.questionText).apply{
+            text = question.question
+            setTextColor(Color.BLACK)
+            textSize = 40f
+            typeface = customFont
+            gravity = Gravity.CENTER_HORIZONTAL
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+
+            ).apply {
+                setMargins(40, 100, 40, 16) // Márgenes
+            }
+        }
+        //questionText.text = question.question
 
         // Obtener el contenedor donde vamos a agregar los elementos dinámicos
         val rangeContainer = findViewById<LinearLayout>(R.id.rangeContainer)
@@ -183,8 +199,16 @@ class PreguntaActivity : AppCompatActivity() {
         rangeContainer.removeAllViews()
 
         // Crear un grupo de RadioButtons
-        val radioGroup = RadioGroup(this)
-        radioGroup.orientation = RadioGroup.HORIZONTAL
+        val radioGroup = RadioGroup(this).apply{
+            orientation = RadioGroup.HORIZONTAL
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(0, 150, 0, 40) // Margen superior de 16px (puedes ajustarlo)
+            }
+        }
+        //radioGroup.orientation = RadioGroup.HORIZONTAL
 
         // Variable para restaurar selección previa
         var selectedRadioButtonId: Int? = null
@@ -196,6 +220,13 @@ class PreguntaActivity : AppCompatActivity() {
                 text = value.toString()
                 //id = value // Le damos un ID único basado en el valor
                 id = View.generateViewId()
+                textSize = 50f // Aumentar tamaño de texto (en SP)
+                typeface = customFont
+                setPadding(20, 16, 50, 16) // Aumentar espacio interno
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
             }
 
             // Si ya había una respuesta guardada, restaurar la selección
@@ -227,10 +258,25 @@ class PreguntaActivity : AppCompatActivity() {
 
     // Método para mostrar una pregunta de tipo UNIQUE_ANSWER
     private fun mostrarPreguntaUnica(question: UniqueAnswerQuestionDTO) {
+        val customFont = ResourcesCompat.getFont(this, R.font.inter)
+
+        val questionText = findViewById<TextView>(R.id.questionText).apply {
+            text = question.question
+            setTextColor(Color.BLACK)
+            textSize = 40f
+            typeface = customFont
+            gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(0, 24, 0, 20) // Margen superior e inferior
+            }
+        }
         // Similar al tipo RANGE, puedes agregar un RadioGroup con las opciones
-        val questionText = findViewById<TextView>(R.id.questionText)
+       /* val questionText = findViewById<TextView>(R.id.questionText)
         questionText.text = question.question
-        questionText.setTextColor(Color.BLACK)
+        questionText.setTextColor(Color.BLACK)*/
         // Obtener el contenedor donde vamos a agregar los elementos dinámicos
         val rangeContainer = findViewById<LinearLayout>(R.id.rangeContainer)
         // Limpiar el contenedor para evitar duplicados
@@ -243,6 +289,7 @@ class PreguntaActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 gravity = Gravity.CENTER_HORIZONTAL// Centra el RadioGroup dentro del contenedor
+                setMargins(0, 16, 0, 5)
             }
             gravity = Gravity.CENTER_HORIZONTAL // Centra los RadioButtons dentro del RadioGroup
         }
@@ -252,10 +299,10 @@ class PreguntaActivity : AppCompatActivity() {
             val radioButton = RadioButton(this).apply {
                 text = option
                 id = View.generateViewId() // Genera un ID único
-                textSize = 20f // Ajusta el tamaño del texto
+                textSize = 26f // Ajusta el tamaño del texto
                 setTextColor(Color.BLACK)
                 typeface = ResourcesCompat.getFont(context, R.font.inter)
-                setPadding(10, 10, 10, 10) // Ajusta el padding interno
+                setPadding(10, 12, 10, 10) // Ajusta el padding interno
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
