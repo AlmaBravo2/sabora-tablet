@@ -1,5 +1,6 @@
 package com.example.saborafrontendtablet
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -29,19 +30,50 @@ import org.json.JSONObject
 class PreguntaActivity : AppCompatActivity() {
 
     private val formsLogic = FormsLogic()
-    private val formIds = listOf(29, 30)  // IDs de los formularios en orden
+    private lateinit var formIds: List<String>  // Lista de formIds
+    //private val formIds = listOf(29, 30)  // IDs de los formularios en orden
     private var currentFormIndex = 0  // Índice del formulario actual
-    private lateinit var questions: List<QuestionDTO>  // Lista de preguntas
+    private var questions: List<QuestionDTO>  = emptyList() // Lista de preguntas
     private var currentQuestionIndex = 0  // Índice de la pregunta actual
     private val answers = mutableMapOf<Int, Any>() // Mapa para guardar respuestas
+    private lateinit var idUsuario: String
+    private lateinit var idExperiencia: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InicioForm.context = this
         setContentView(R.layout.activity_pregunta)
 
         val formsLogic = FormsLogic()
-        val formId = "29"
+        //val formId = "30"
 
+        // Recibir los formIds, idUsuario y idExperiencia desde el Intent
+        //formIds = intent.getStringArrayListExtra("formIds") ?: emptyList()
+        //idUsuario = intent.getStringExtra("idUsuario") ?: ""
+        //idExperiencia = intent.getStringExtra("idExperiencia") ?: ""
+        val jsonString = intent.getStringExtra("jsonData") ?: ""
+        val jsonObject = JSONObject(jsonString)
+
+        val formIdJsonArray = jsonObject.getJSONArray("id_form")
+        formIds = List(formIdJsonArray.length()) { index -> formIdJsonArray.getInt(index).toString() }
+
+        idUsuario = jsonObject.getInt("id_user").toString()
+        idExperiencia = jsonObject.getInt("id_experience").toString()
+
+        if (formIds.isEmpty()) {
+            Toast.makeText(this, "No se recibió una lista de formularios válida", Toast.LENGTH_LONG).show()
+            finish() // Finaliza la actividad si no se recibió una lista válida de formularios
+            return
+        }
+
+        // Cargar el primer formulario
+        cargarFormulario(formIds[currentFormIndex])
+
+        val siguienteButton = findViewById<Button>(R.id.buttonSiguiente)
+        siguienteButton.setOnClickListener {
+            avanzarPregunta()  // Llama a avanzarPregunta() cuando el usuario presione el botón "Siguiente"
+        }
+/*
         formsLogic.getFormById(formId) { response ->
             // Si la respuesta es nula, mostramos un error
             if (response == null) {
@@ -72,6 +104,34 @@ class PreguntaActivity : AppCompatActivity() {
         // Botón siguiente para avanzar entre preguntas
         findViewById<Button>(R.id.buttonSiguiente).setOnClickListener {
             avanzarPregunta()
+        }
+        */
+
+    }
+
+    private fun cargarFormulario(formId: String) {
+        formsLogic.getFormById(formId) { response ->
+            if (response == null) {
+                Toast.makeText(this, "Error al obtener el formulario", Toast.LENGTH_LONG).show()
+                return@getFormById
+            }
+
+            try {
+                val objectMapper = jacksonObjectMapper()
+                val form = objectMapper.readValue<FormDTO>(response.toString())
+
+                // Ahora tienes el formulario completo, incluyendo las preguntas
+                questions = form.questions
+
+                if (questions.isNotEmpty()) {
+                    mostrarPregunta(questions[currentQuestionIndex]) // Muestra la primera pregunta
+                } else {
+                    Toast.makeText(this, "No hay preguntas disponibles", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                Log.e("PreguntaActivity", "Error al procesar el formulario: ${e.message}")
+            }
         }
     }
 
@@ -125,15 +185,101 @@ class PreguntaActivity : AppCompatActivity() {
             currentQuestionIndex++
             mostrarPregunta(questions[currentQuestionIndex])
         } else {
-            enviarRespuestas()
+            //enviarRespuestas()
             //Toast.makeText(this, "No hay más preguntas", Toast.LENGTH_SHORT).show()
+
+            // Si ya terminamos el formulario actual, enviar las respuestas de este formulario
+            enviarRespuestas(formIds[currentFormIndex].toInt())  // Enviar respuestas del formulario actual
+            /*
+            if (currentFormIndex < formIds.size - 1) {
+                currentFormIndex++  // Incrementamos al siguiente formulario
+                currentQuestionIndex = 0  // Reiniciamos las preguntas para el nuevo formulario
+                //cargarFormulario(formIds[currentFormIndex])  // Cargamos el siguiente formulario
+
+                // Llamamos a InicioForm para que el usuario vea un mensaje intermedio
+                val intent = Intent(this, InicioForm::class.java)
+                intent.putExtra("nextFormId", formIds[currentFormIndex])  // Le pasamos el siguiente formId
+                startActivity(intent)
+            } else {
+                /*enviarRespuestas()
+                Toast.makeText(this, "Todos los formularios completados", Toast.LENGTH_SHORT).show()
+                finish()  // Finalizamos la actividad cuando todos los formularios se completan*/
+                Toast.makeText(this, "Todos los formularios completados", Toast.LENGTH_SHORT).show()
+                finish()  // Finalizamos la actividad cuando todos los formularios se completan
+            }
+        }*/
         }
     }
 
+    private fun enviarRespuestas(formId: Int) {
+        val formsLogic = FormsLogic()
+        val experienceId = idExperiencia.toInt() // Usamos el idExperiencia recibido en el Intent
+        val userDni = "weJi1HX7ylzFUTWCSDdpAg==" // Se debe obtener dinámicamente del usuario autenticado
+
+        // Crear un JSONArray para las respuestas
+        val answersArray = JSONArray()
+
+        // Construir la lista de respuestas como un JSONArray
+        answers.forEach { (questionId, answer) ->
+            val answerObject = JSONObject().apply {
+                put("id", 0) // ID de la respuesta (según la API, podría ser 0 si es nueva)
+                put("questionId", questionId)
+                put("answer", answer.toString())
+            }
+            answersArray.put(answerObject) // Agregar el objeto de respuesta al JSONArray
+        }
+
+        // Crear el JSON final
+        val jsonObject = JSONObject().apply {
+            put("formId", formId) // Usamos el formId pasado como parámetro
+            put("experienceId", experienceId)
+            put("userDni", idUsuario)
+            put("answers", answersArray)
+        }
+
+        Log.i("Enviando respuestas", jsonObject.toString())
+
+        // Enviar respuestas
+        formsLogic.sendAnswers(jsonObject) { success, message ->
+            runOnUiThread {
+                if (success) {
+                    Toast.makeText(this, "Respuestas enviadas correctamente", Toast.LENGTH_SHORT).show()
+                    // Aquí es donde deberíamos decidir si pasar al siguiente formulario o terminar
+                    avanzarFormulario()
+                } else {
+                    Log.e("Error al enviar respuestas", "Mensaje de error: $message")
+                    if (message.contains("Value Respuestas of type")) {
+                        Toast.makeText(this, "Formulario guardado correctamente", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Error al enviar respuestas: $message", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun avanzarFormulario() {
+        // Aquí avanzamos al siguiente formulario, por ejemplo, lanzamos la pantalla intermedia
+        if (currentFormIndex < formIds.size - 1) {
+            // Incrementamos al siguiente formulario
+            currentFormIndex++
+            currentQuestionIndex = 0 // Reiniciamos las preguntas para el nuevo formulario
+
+            // Lanzamos la actividad de transición (InicioForm) entre formularios
+            val intent = Intent(this, InicioForm::class.java)
+            intent.putExtra("nextFormId", formIds[currentFormIndex]) // Enviamos el siguiente formId
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Todos los formularios completados", Toast.LENGTH_SHORT).show()
+            finish() // Finalizamos la actividad si todos los formularios han sido completados
+        }
+    }
+/*
     private fun enviarRespuestas() {
         val formsLogic = FormsLogic()
-        val formId = 29 // Reemplazar con el ID real del formulario
-        val experienceId = 4 // Se debe obtener el ID real de la experiencia
+        val formId = 30 // Reemplazar con el ID real del formulario
+        //val experienceId = 4 // Se debe obtener el ID real de la experiencia
+        val experienceId = idExperiencia.toInt() // Usamos el idExperiencia recibido en el Intent
         val userDni = "weJi1HX7ylzFUTWCSDdpAg==" // Se debe obtener dinámicamente del usuario autenticado
 
         // Crear un JSONArray para las respuestas
@@ -178,7 +324,7 @@ class PreguntaActivity : AppCompatActivity() {
             }
         }
     }
-
+*/
     // Método para mostrar una pregunta de tipo RANGE
     private fun mostrarPreguntaRango(question: RangeQuestionDTO) {
         val customFont = ResourcesCompat.getFont(this, R.font.inter)

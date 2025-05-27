@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    android:background="#EEEEEE">
+
+    <TextView
+        android:id="@+id/pregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Pregunta"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:ems="20"
+        android:fontFamily="@font/inter"
+        android:gravity="top|start"
+        android:hint="Escribe la pregunta"
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:textColor="@color/black"
+        android:textColorHint="#544B4B"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoPregunta"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/layoutDinamico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonEliminarPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_gris_claro"
+        android:drawableStart="@drawable/cruz_negra"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/inter"
+        android:layout_gravity="end"
+        android:layout_marginEnd="100dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:text="Eliminar pregunta"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="10dp" />
+</LinearLayout>

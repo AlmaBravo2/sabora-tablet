@@ -30,6 +30,8 @@ class LogInLogic {
             { response ->
                 try {
                 val user = JSONObject(response.toString())
+                val dni = user.getString("dni")
+                    LogIn.loggedUserDni = dni  // Guardas el DNI globalmente
 
                 callback(true, "Login exitoso: ${user.toString()}")
 
@@ -44,4 +46,7 @@ class LogInLogic {
         )
         queue.add(jsonObjectRequest)
     }
+
+
+
 }

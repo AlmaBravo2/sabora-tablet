@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/button_white"
     tools:context=".LogIn">
 
 
@@ -44,7 +43,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -60,7 +59,7 @@
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:textColorHint="#D6D6D6"
                 android:textSize="30dp" />
 
             <EditText
@@ -73,7 +72,7 @@
                 android:inputType="textPassword"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:textColorHint="#D6D6D6"
                 android:textSize="30dp" />
 
             <Button
@@ -84,14 +83,26 @@
                 android:background="@drawable/button_white"
                 android:fontFamily="@font/inter"
                 android:gravity="center"
-                android:text="Entrar"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
-                android:textSize="30dp"
-                android:paddingVertical="20dp"
                 android:paddingHorizontal="70dp"
-                />
+                android:paddingVertical="20dp"
+                android:text="Entrar"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/buttonVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/inter"
+            android:layout_marginTop="45dp"
+            android:ems="5"
+            android:inputType="text"
+            android:text="Volver"
+            android:clickable="true"
+            android:focusable="true"/>
 
 
     </LinearLayout>

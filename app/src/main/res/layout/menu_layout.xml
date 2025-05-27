@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Menu"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="-350dp">
+
+        <Button
+            android:id="@+id/buttonExperiencia"
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/button_greensabora"
+            android:fontFamily="@font/inter"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="80dp"
+            android:paddingVertical="20dp"
+            android:text="Comenzar experiencia"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/buttonForms"
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/button_greensabora"
+            android:fontFamily="@font/inter"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="80dp"
+            android:paddingVertical="20dp"
+            android:text="Consultar formularios creados"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/buttonNuevoForm"
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/button_greensabora"
+            android:fontFamily="@font/inter"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="80dp"
+            android:paddingVertical="20dp"
+            android:text="Crear nuevo formulario"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="105dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/logo_tagline_derecha" />
+
+        <TextView
+            android:id="@+id/buttonSalir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:ems="5"
+            android:focusable="true"
+            android:fontFamily="@font/inter"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="Salir" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

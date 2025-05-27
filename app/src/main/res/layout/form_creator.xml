@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormCreator">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/tituloForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Título del formulario"
+                    android:hint="Título del formulario"
+                    android:textSize="30sp"
+                    android:inputType="text"
+                    android:fontFamily="@font/inter"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical"
+                        android:background="#EEEEEE"
+                        >
+
+                        <TextView
+                            android:id="@+id/pregunta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="Pregunta"
+                            android:fontFamily="@font/inter"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/primeraPregunta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:ems="20"
+                            android:fontFamily="@font/inter"
+                            android:gravity="top|start"
+                            android:hint="Escribe la pregunta"
+                            android:inputType="textMultiLine"
+                            android:scrollHorizontally="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="#544B4B"
+                            android:textSize="18sp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerTipoPrimeraPregunta"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content" />
+
+                        <!-- Contenedor donde se mostrará dinámicamente el contenido -->
+                        <LinearLayout
+                            android:id="@+id/layoutDinamicoPrimeraPregunta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="16dp" />
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/contenedorPreguntas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="81dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp">
+
+                    <Button
+                        android:id="@+id/buttonNuevaPregunta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/button_gris_medio"
+                        android:drawableStart="@drawable/icono_plus"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="@font/inter"
+                        android:gravity="center"
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="20dp"
+                        android:text="Añadir pregunta"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/guardarFormButton"
+                    android:layout_width="364dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_greensabora"
+                    android:fontFamily="@font/inter"
+                    android:text="Guardar formulario"
+                    android:textSize="17dp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/resultadoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="¡Formulario guardado con éxito!"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

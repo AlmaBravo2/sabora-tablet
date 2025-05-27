@@ -3,8 +3,11 @@ package com.example.saborafrontendtablet
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -51,24 +54,43 @@ class LogIn : AppCompatActivity() {
                 runOnUiThread {
                     if (success) {
                         Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, InicioForm::class.java)
+                        loggedUserName = username
+                        loggedUserPassword = password
+
+                        val intent = Intent(this, Menu::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "El usuario y/o la contraseña no son correctos", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+        }
+
+        val volverButton = findViewById<TextView>(R.id.buttonVolver)
+
+        val content = SpannableString(volverButton.text)
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+        volverButton.text = content
+
+        // Listener de click para cambiar de pantalla
+        volverButton.setOnClickListener {
+            val intent = Intent(this, MainInitialScreen::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
     }
 
     companion object{
 
         lateinit var context: Context
-
+        var loggedUserName: String? = null
+        var loggedUserPassword: String? = null
+        var loggedUserDni: String? = null
 
         fun getAppContext() : Context{
             return context
         }
+
     }
 }

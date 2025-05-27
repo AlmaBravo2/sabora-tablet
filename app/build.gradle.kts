@@ -69,6 +69,9 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0") // Para compatibilidad con Kotlin
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("com.google.code.gson:gson:2.10.1")
 
 
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:layout_gravity="center_horizontal"
+    tools:context=".MainInitialScreen">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="450dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.214"
+
+        app:layout_constraintWidth_percent="0.3"
+        app:srcCompat="@drawable/logo_tagline_derecha" />
+
+    <Button
+        android:id="@+id/buttonIniciarSesion"
+        android:layout_width="333dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/button_greensabora"
+        android:fontFamily="@font/inter"
+        android:gravity="center"
+        android:paddingHorizontal="70dp"
+        android:paddingVertical="20dp"
+        android:text="Inicia sesión"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/noCuentaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="23"
+        android:fontFamily="@font/inter"
+        android:gravity="center"
+        android:text="¿No tienes una cuenta? Accede a la app móvil Sabora"
+        tools:layout_editor_absoluteX="449dp"
+        tools:layout_editor_absoluteY="664dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonIniciarSesion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
