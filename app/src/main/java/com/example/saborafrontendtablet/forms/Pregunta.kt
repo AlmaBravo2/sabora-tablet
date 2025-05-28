@@ -1,9 +1,9 @@
 package com.example.saborafrontendtablet.forms
 
-data class Pregunta (
+data class Pregunta(
 
     val tipo: String,
-    val id: Int,
+    val id: Int?,
     val texto: String,
     val opciones: List<String>? = null,
     val min: Int? = null,
@@ -11,4 +11,4 @@ data class Pregunta (
     val interval: Int? = null,
 
 
-)
+    )

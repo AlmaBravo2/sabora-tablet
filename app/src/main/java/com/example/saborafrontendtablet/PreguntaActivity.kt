@@ -48,17 +48,18 @@ class PreguntaActivity : AppCompatActivity() {
         //val formId = "30"
 
         // Recibir los formIds, idUsuario y idExperiencia desde el Intent
-        //formIds = intent.getStringArrayListExtra("formIds") ?: emptyList()
-        //idUsuario = intent.getStringExtra("idUsuario") ?: ""
-        //idExperiencia = intent.getStringExtra("idExperiencia") ?: ""
-        val jsonString = intent.getStringExtra("jsonData") ?: ""
-        val jsonObject = JSONObject(jsonString)
+        formIds = intent.getStringArrayListExtra("formIds") ?: emptyList()
+        idUsuario = intent.getStringExtra("idUsuario") ?: ""
+        idExperiencia = intent.getStringExtra("idExperiencia") ?: ""
 
-        val formIdJsonArray = jsonObject.getJSONArray("id_form")
-        formIds = List(formIdJsonArray.length()) { index -> formIdJsonArray.getInt(index).toString() }
-
-        idUsuario = jsonObject.getInt("id_user").toString()
-        idExperiencia = jsonObject.getInt("id_experience").toString()
+//        val jsonString = intent.getStringExtra("jsonData") ?: ""
+//        val jsonObject = JSONObject(jsonString)
+//
+//        val formIdJsonArray = jsonObject.getJSONArray("id_form")
+//        formIds = List(formIdJsonArray.length()) { index -> formIdJsonArray.getInt(index).toString() }
+//
+//        idUsuario = jsonObject.getInt("id_user").toString()
+//        idExperiencia = jsonObject.getInt("id_experience").toString()
 
         if (formIds.isEmpty()) {
             Toast.makeText(this, "No se recibió una lista de formularios válida", Toast.LENGTH_LONG).show()
@@ -116,12 +117,21 @@ class PreguntaActivity : AppCompatActivity() {
                 return@getFormById
             }
 
+            // Verifica que el JSON no esté vacío
+            if (response.length() == 0) {
+                Log.e("PreguntaActivity", "El JSON recibido está vacío")
+                Toast.makeText(this, "Formulario vacío", Toast.LENGTH_SHORT).show()
+                return@getFormById
+            }
+
             try {
                 val objectMapper = jacksonObjectMapper()
+                Log.d("PreguntaActivity", "JSON recibido: ${response.toString()}")
+
                 val form = objectMapper.readValue<FormDTO>(response.toString())
 
                 // Ahora tienes el formulario completo, incluyendo las preguntas
-                questions = form.questions
+                questions = form.questions ?: emptyList()
 
                 if (questions.isNotEmpty()) {
                     mostrarPregunta(questions[currentQuestionIndex]) // Muestra la primera pregunta
@@ -131,6 +141,7 @@ class PreguntaActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 Log.e("PreguntaActivity", "Error al procesar el formulario: ${e.message}")
+                Toast.makeText(this, "Error al cargar el formulario", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -214,7 +225,6 @@ class PreguntaActivity : AppCompatActivity() {
     private fun enviarRespuestas(formId: Int) {
         val formsLogic = FormsLogic()
         val experienceId = idExperiencia.toInt() // Usamos el idExperiencia recibido en el Intent
-        val userDni = "weJi1HX7ylzFUTWCSDdpAg==" // Se debe obtener dinámicamente del usuario autenticado
 
         // Crear un JSONArray para las respuestas
         val answersArray = JSONArray()
@@ -233,7 +243,7 @@ class PreguntaActivity : AppCompatActivity() {
         val jsonObject = JSONObject().apply {
             put("formId", formId) // Usamos el formId pasado como parámetro
             put("experienceId", experienceId)
-            put("userDni", idUsuario)
+            put("userIdentifier", idUsuario)
             put("answers", answersArray)
         }
 

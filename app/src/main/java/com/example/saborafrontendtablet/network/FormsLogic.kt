@@ -6,6 +6,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.saborafrontendtablet.BuildConfig
 import com.example.saborafrontendtablet.FormCreator
@@ -139,7 +140,7 @@ class FormsLogic {
             Log.d("FormsLogic", "Formulario completo: $this")
         }
 
-        val jsonRequest = object : JsonObjectRequest(
+        /*val jsonRequest = object : JsonObjectRequest(
             Method.POST, url, jsonFormulario,
             { response ->
                 Log.i("FormsLogic", "Respuesta recibida: $response")
@@ -156,9 +157,37 @@ class FormsLogic {
                 // headers["Authorization"] = "Bearer token" // si es necesario
                 return headers
             }
-        }
+        }*/
+         val stringRequest = object : StringRequest(
+             Method.POST, url,
+             { response ->
+                 Log.i("FormsLogic", "Respuesta recibida: $response")
+                 Toast.makeText(FormCreator.getAppContext(), "Formulario enviado con éxito", Toast.LENGTH_SHORT).show()
+             },
+             { error ->
+                 Log.e("FormsLogic", "Error al enviar formulario", error)
+                 Toast.makeText(FormCreator.getAppContext(), "Error al enviar formulario: ${error.message}", Toast.LENGTH_LONG).show()
+             }
+         ) {
+             override fun getHeaders(): MutableMap<String, String> {
+                 val headers = HashMap<String, String>()
+                 headers["Content-Type"] = "application/json"
+                 return headers
+             }
 
-        requestQueue.add(jsonRequest)
+             override fun getBody(): ByteArray {
+                 return jsonFormulario.toString().toByteArray(Charsets.UTF_8)
+             }
+
+             override fun getBodyContentType(): String {
+                 return "application/json"
+             }
+         }
+
+         requestQueue.add(stringRequest)
+         Log.d("FormsLogic", "Solicitud añadida a la cola")
+
+        requestQueue.add(stringRequest)
          Log.d("FormsLogic", "Solicitud añadida a la cola")
     }
 

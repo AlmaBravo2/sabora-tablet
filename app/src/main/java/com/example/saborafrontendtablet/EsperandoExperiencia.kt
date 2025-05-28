@@ -32,10 +32,10 @@ class EsperandoExperiencia : AppCompatActivity() {
 
         context = this
 
-        logic.registerTablet("TabletBlanca")
+        logic.registerTablet("NuevaTablet")
         udpReceiver.stopListening()
         udpReceiver.startListening { json ->
-            Log.d("UDP", "Mensaje recibido: $json")
+            Log.i("UDP", "Mensaje recibido : $json")
             /*recibiré algo así??
             *{
               "id_usuario": "5678",
@@ -64,7 +64,7 @@ class EsperandoExperiencia : AppCompatActivity() {
                 //val idFormulario = json.optString("id_form", "")
                 val formularios = json.optJSONArray("id_form")
 
-                Log.d("UDP", "Extraídos -> id_user: $idUsuario, id_experience: $idExperiencia, id_form: $formularios")
+                Log.i("UDP", "Extraídos -> id_user: $idUsuario, id_experience: $idExperiencia, id_form: $formularios")
 
                 // Lista para almacenar los ID de los formularios
                 val formIds = mutableListOf<String>()
@@ -78,7 +78,8 @@ class EsperandoExperiencia : AppCompatActivity() {
                         }
                     }
                 } else{
-                    Log.w("UDP", "El campo 'id_form' no está presente o es null")
+
+                    Log.i("UDP", "El campo 'id_form' no está presente o es null")
                 }
 
                 Log.i("UDPReceiver", "id_experience: $idExperiencia, id_user: $idUsuario, formularios: $formIds")

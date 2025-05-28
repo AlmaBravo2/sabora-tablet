@@ -1,14 +1,12 @@
 package com.example.saborafrontendtablet
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -16,21 +14,14 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.RadioGroup
-import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
-import com.example.saborafrontendtablet.EsperandoExperiencia.Companion.context
-import com.example.saborafrontendtablet.LogIn.Companion.loggedUserName
 import com.example.saborafrontendtablet.forms.Pregunta
 import com.example.saborafrontendtablet.network.FormsLogic
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.GsonBuilder
 
 class FormCreator : AppCompatActivity() {
@@ -456,7 +447,7 @@ class FormCreator : AppCompatActivity() {
                 preguntas.add(
                     Pregunta(
                         tipo = tipoPregunta,
-                        id = (1000..9999).random(),
+                        id = null,
                         texto = textoPregunta!!,
                         opciones = opciones,
                         min = min,
